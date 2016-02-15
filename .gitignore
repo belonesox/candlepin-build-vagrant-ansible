@@ -1,0 +1,12 @@
+*.db
+*.pdf
+*.old
+e
+e2
+e3
+bred*
+.vagrant
+log*
+*.log
+test*.sh
+*.*~

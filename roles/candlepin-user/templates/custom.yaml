@@ -1,0 +1,12 @@
+candlepin.conf:
+  amqp_enabled: "false"
+  pinsetter_enabled: "true"
+  custom_logging:
+    "org.candlepin.common.filter": "DEBUG"
+    "org.candlepin.guice.CandlepinContextListener": "DEBUG"
+    "org.candlepin.controller": "INFO"
+  additional_properties: |
+    pinsetter.org.candlepin.pinsetter.tasks.CancelJobJob.schedule = 0 0/15 * * * ?
+    pinsetter.org.candlepin.pinsetter.tasks.UnpauseJob.schedule = 0 0/15 * * * ?
+    pinsetter.org.candlepin.pinsetter.tasks.CertificateRevocationListTask.schedule  = 0 0/5 * * * ?
+    log4j.logger.org.candlepin=DEBUG

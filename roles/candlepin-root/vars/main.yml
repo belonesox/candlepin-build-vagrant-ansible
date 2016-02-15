@@ -1,0 +1,5 @@
+---
+certs_dir: /etc/httpd/certs/
+basedir:   /var/www/vzlicense-site/
+gitlocal:  ssh://git@localhost:7999
+keyadmin_endpoint_port: 8453

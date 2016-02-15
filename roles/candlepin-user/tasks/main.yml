@@ -1,0 +1,13 @@
+- git: repo=https://github.com/candlepin/candlepin.git dest=~/candlepin force=yes accept_hostkey=yes
+- bundler: state=latest user_install=True chdir=/home/{{ansible_ssh_user}}/candlepin
+- command: ~/bin/buildr clean test=no package
+  args:
+      chdir: ~/candlepin
+      creates: ~/candlepin/server/target/*.war
+- template: src=custom.yaml dest=/home/{{ansible_ssh_user}}/candlepin/server/
+- shell: ./server/bin/deploy -g -a
+  args:
+    chdir: ~/candlepin
+    creates: /etc/candlepin/candlepin.conf
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/home/{{ ansible_ssh_user }}/bin"        

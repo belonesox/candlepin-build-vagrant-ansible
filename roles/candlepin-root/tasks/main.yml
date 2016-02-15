@@ -1,0 +1,39 @@
+- yum: name={{item}}
+  with_items:
+    - tomcat
+    - ruby
+    - rubygems
+    - ruby-devel
+    - java-1.8.0-openjdk-devel
+    - postgresql-jdbc
+    - postgresql-server
+    - postgresql        
+    - zlib
+    - zlib-devel
+    - liquibase
+    - python-psycopg2
+    - libxml2-python
+- name: Initiate database
+  command: service postgresql initdb
+           creates=/var/lib/pgsql/data/postgresql.conf
+
+- replace: dest=/var/lib/pgsql/data/pg_hba.conf regexp='(ident|peer)' replace='trust' backup=yes
+
+- name: Start PostgreSQL and enable at boot
+  service: name=postgresql
+           enabled=yes
+           state=started
+- firewalld: zone=public port={{item}}/tcp permanent=true state=enabled
+  notify:
+    - firewalld_restart
+  with_items:
+  - 22
+  - 5432
+  - 443
+  - 8443
+- name: Gem refreshing
+  command: gem update --system
+- gem: name=json_pure user_install=False 
+- gem: name=bundler user_install=False
+- postgresql_user: name=candlepin  role_attr_flags=CREATEDB
+- postgresql_db:   name=candlepin owner=candlepin

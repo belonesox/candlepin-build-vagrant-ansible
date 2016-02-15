@@ -1,0 +1,25 @@
+- selinux: state=disabled
+#- authorized_key: user=root key=https://github.com/yourgithubnamehere.keys
+- yum: name=epel-release
+- name: base packages
+  yum: name={{item}}
+  with_items:
+    - make
+    - gcc
+    - gettext
+    - openssl
+    - htop
+    - ack
+    - mc
+    - ncdu
+    - tmux
+    - strace
+    - psmisc
+    - curl
+    - wget
+    - lynx
+
+
+
+
+        

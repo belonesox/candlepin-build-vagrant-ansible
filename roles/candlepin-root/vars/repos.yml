@@ -1,0 +1,7 @@
+---
+repos:
+  - {dest: '/var/www/vzlicense-site',  url: 'ssh://git@localhost:7999/int/vzlicense-site.git'}
+  - {dest: '/var/www/vzlicense-site/license/candlepinsync',  url: 'ssh://git@localhost:7999/int/candlepinsync.git'}
+  - {dest: '/var/www/vzlicense-site/license/endpoint',  url: 'ssh://git@localhost:7999/int/keyadmin-candlepin-endpoint-wcgi.git'}
+  - {dest: '/var/www/vzlicense-site/license/endpoint',  url: 'ssh://git@localhost:7999/int/keyadmin-candlepin-endpoint-wcgi.git'}
+  - {dest: '/var/www/vzlicense-site/endpoint/endpoint_implementations/candlepinsync',  url: 'ssh://git@localhost:7999/int/candlepinsync.git'}
