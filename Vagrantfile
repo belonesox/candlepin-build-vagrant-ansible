@@ -20,7 +20,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "candlepin" do |conf|
     conf.vm.box = "centos7min"
     conf.vm.network "private_network", ip: "192.168.1.2"
-    conf.vm.hostname = "subscription.virtuozzo.com"    
+    conf.vm.hostname = "subscription.example.com"    
     conf.vm.network "forwarded_port", guest: 22,    host: 6022, id: 'ssh'    
     #conf.vm.network "forwarded_port", guest: 443,  host: 6443
     #conf.vm.network "forwarded_port", guest: 8443, host: 6444

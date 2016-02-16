@@ -3,11 +3,15 @@
 - command: ~/bin/buildr clean test=no package
   args:
       chdir: ~/candlepin
-      creates: ~/candlepin/server/target/*.war
+      creates: ~/candlepin/server/target/*.zip
 - template: src=custom.yaml dest=/home/{{ansible_ssh_user}}/candlepin/server/
+- replace: dest=/home/{{ansible_ssh_user}}/candlepin/server/bin/gen-certs regexp='CA_KEY 1024' replace='CA_KEY 2048' backup=yes
+- replace: dest=/home/{{ansible_ssh_user}}/candlepin/server/bin/gen-certs regexp='-days 365' replace='-days 1825' backup=yes
+- replace: dest=/home/{{ansible_ssh_user}}/candlepin/server/bin/gen-certs regexp='L=Raleigh' replace='L=Seattle' backup=yes
 - shell: ./server/bin/deploy -g -a
   args:
     chdir: ~/candlepin
     creates: /etc/candlepin/candlepin.conf
   environment:
-    PATH: "{{ ansible_env.PATH }}:/home/{{ ansible_ssh_user }}/bin"        
+    PATH: "{{ ansible_env.PATH }}:/home/{{ ansible_ssh_user }}/bin"
+    
